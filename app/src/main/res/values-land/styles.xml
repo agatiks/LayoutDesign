@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Text">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="Text.Header" parent="Text">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+    <style name="Text.Degrees" parent="Text">
+        <item name="android:textSize">30sp</item>
+        <item name="fontFamily">@font/montserrat_bold</item>
+    </style>
+
+    <style name="Text.blueDegrees" parent="Text">
+        <item name="android:textSize">20sp</item>
+
+        <item name="android:textColor">@color/primaryColorDark</item>
+    </style>
+</resources>
