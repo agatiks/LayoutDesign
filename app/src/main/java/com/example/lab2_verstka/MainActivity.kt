@@ -4,17 +4,40 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Layout
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import java.time.DayOfWeek
 
 class MainActivity : AppCompatActivity() {
+    val LKEY = "light"
     lateinit var degreesOfWeek: Map<String, Pair<Int, Int>>
     lateinit var resOfWeather: Map<String, Int>
     lateinit var weatherOfWeek: Map<String, String>
     lateinit var idOfWeek: Map<String, Int>
+    var isLight: Boolean = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        isLight = savedInstanceState?.getBoolean(LKEY) ?: true
         setContentView(R.layout.activity_main)
+        val changeTheme = findViewById<ImageView>(R.id.theme)
+        if(isLight) {
+            changeTheme.setImageResource(R.drawable.sun)
+        } else {
+            changeTheme.setImageResource(R.drawable.cloudy)
+        }
+        changeTheme.setOnClickListener(View.OnClickListener {
+            if(isLight) {
+                isLight = !isLight
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+
+            } else {
+                isLight = !isLight
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
+            }
+        })
         setTodayExtra()
         val SUN = getString(R.string.sunday)
         val MON = getString(R.string.monday)
@@ -22,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         val WED = getString(R.string.wednesday)
         val THU = getString(R.string.thursday)
         val FRI = getString(R.string.friday)
+
+
         val SAT = getString(R.string.saturday)
         val W_SUN = "SUNNY"
         val W_CLO = "CLOUDY"
@@ -63,6 +88,10 @@ class MainActivity : AppCompatActivity() {
         setNextDays()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(LKEY, isLight)
+    }
     private fun setNextDays() {
         for (entry in idOfWeek) {
             val temp = findViewById<LinearLayout>(entry.value)

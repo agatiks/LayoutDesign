@@ -6,5 +6,6 @@
     <color name="blue_700">#0E2E3C</color>
     <color name="primaryColor">@color/white</color>
     <color name="primaryColorDark">#A1E1FF</color>
+    <color name="back">@color/blue_200</color>
     <color name="textColor">@color/black</color>
 </resources>
